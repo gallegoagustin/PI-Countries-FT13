@@ -1,31 +1,31 @@
-const {Country, Activity} = require('../db');
-const axios = require('axios').default;
+const { Country, Activity } = require('../db');
+const { loadCountriesToDb } = require('../utils/loadCountriesToDb');
 
 module.exports = async(req, res) => {
-    let paises = await axios.get('https://restcountries.eu/rest/v2/all');
-    let aux = paises.data;
+    await loadCountriesToDb();
+    
+    const queryParam = req.query.name;
+
+    if(queryParam) {
+        const match = await Country.findAll({
+            where: {
+                name: queryParam
+            }
+        })
+
+        if(!match.length) {
+            return res.json({message: 'We could not find any country'})
+        } else {
+            return res.json(match);
+        }
+    }
+
+    const match = await Country.findAll();
     let result = [];
     let i = 0;
 
-    for(let i = 0; i < aux.length; i++) {
-        await Country.findOrCreate({
-            where: {
-                id: aux[i].alpha3Code,
-                name: aux[i].name,
-                flag: aux[i].flag,
-                continent: aux[i].region,
-                capital: aux[i].capital,
-                subregion: aux[i].subregion,
-                area: aux[i].area,
-                population: aux[i].population
-            }
-        })
-    }
-
-    const dbCountries = await Country.findAll();
-
     while(i < 10) {
-        result.push(dbCountries[i]);
+        result.push(match[i]);
         i++
     }
 
