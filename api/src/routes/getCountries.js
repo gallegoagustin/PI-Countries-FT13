@@ -1,4 +1,5 @@
-const { Country, Activity } = require('../db');
+const { Country } = require('../db');
+const { Op, Sequelize } = require('sequelize');
 const { loadCountriesToDb } = require('../utils/loadCountriesToDb');
 
 module.exports = async(req, res) => {
@@ -7,9 +8,12 @@ module.exports = async(req, res) => {
     const queryParam = req.query.name;
 
     if(queryParam) {
+        const parsedQueryParam = queryParam[0].toUpperCase() + queryParam.slice(1).toLowerCase();
         const match = await Country.findAll({
             where: {
-                name: queryParam
+                name: {
+                    [Op.substring]: Sequelize.literal(parsedQueryParam)
+                }
             }
         })
 
