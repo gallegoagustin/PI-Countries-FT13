@@ -1,6 +1,8 @@
 const { Country } = require('../db');
-const { Op, Sequelize } = require('sequelize');
+const { Op } = require('sequelize');
 const { loadCountriesToDb } = require('../utils/loadCountriesToDb');
+const { dbParser } = require('../utils/dbParser');
+
 
 module.exports = async(req, res) => {
     await loadCountriesToDb();
@@ -8,14 +10,25 @@ module.exports = async(req, res) => {
     const queryParam = req.query.name;
 
     if(queryParam) {
-        const parsedQueryParam = queryParam[0].toUpperCase() + queryParam.slice(1).toLowerCase();
-        const match = await Country.findAll({
+        const parsedQueryParam = dbParser(queryParam);
+        
+        let match = await Country.findAll({
             where: {
                 name: {
-                    [Op.substring]: Sequelize.literal(parsedQueryParam)
+                    [Op.substring]: queryParam
                 }
             }
         })
+
+        if(!match.length) {
+            match = await Country.findAll({
+                where: {
+                    name: {
+                        [Op.substring]: parsedQueryParam
+                    }
+                }
+            })
+        }
 
         if(!match.length) {
             return res.json({message: 'We could not find any country'})
