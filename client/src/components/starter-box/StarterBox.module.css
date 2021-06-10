@@ -1,0 +1,33 @@
+.boxContainer {
+    background-color: #00adb5;
+    color: #222831;
+    height: 40vh;
+    width: 40vh;
+    padding: 0 5px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: center;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.separator {
+    width: 66%;
+    height: 1px;
+    border-style: hidden;
+    background-color: #222831;
+}
+
+.getStartedBox {
+    background-color: #eeeeee;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bolder;
+}
+
+.getStartedBox:hover {
+    transform: scale(1.1);
+    box-shadow: 3px 3px 1px 0px rgba(0,0,0,0.4);
+}
