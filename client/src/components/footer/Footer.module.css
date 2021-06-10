@@ -1,0 +1,22 @@
+.footerContainer {
+    min-height: 5vh;
+    width: 100%;
+    background-color: #00adb5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconsContainer {
+    margin-left: 3em;
+}
+
+.footerIcon {
+    height: 1.5em;
+    margin: 0.1em 0.4em;
+}
+
+#henry {
+    height: 1.5em;
+    margin: 0 0.4em;
+}
