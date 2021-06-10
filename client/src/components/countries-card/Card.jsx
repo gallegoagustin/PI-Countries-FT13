@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { countryDetail } from '../../actions';
 import styles from './Card.module.css';
 
-export default function Card(props) {
+function Card(props) {
     return (
         <div className={styles.cardContainer}>
             <img className={styles.cardFlag} src={props.flag} alt="" />
@@ -13,8 +15,16 @@ export default function Card(props) {
                 Continent: {props.continent}
             </div>
             <div>
-                <Link><a className={styles.seeMore}><strong>See more</strong></a></Link>
+                <Link to={`/home/${props.id}`} ><a className={styles.seeMore} onClick={() => {props.countryDetail(props.id)}}><strong>See more</strong></a></Link>
             </div>
         </div>
     )
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+      countryDetail: (id) => dispatch(countryDetail(id)),
+    };
+  }
+  
+export default connect(null, mapDispatchToProps)(Card);

@@ -1,5 +1,5 @@
 .navContainer {
-    max-width: 100%;
+    width: 100vp;
     height: 10vh;
     background-color: #393e46;
     display: flex;

@@ -1,6 +1,6 @@
 .searchForm {
     margin-top: 2em;
-    width: 35vh;
+    width: 37.5vh;
     display: flex;
     justify-content: space-between;
 }
@@ -19,7 +19,7 @@
 
 .searchButton {
     background-color: transparent;
-    height: 2em;
+    height: 2.2em;
     width: 5em;
     font-size: 1rem;
     color: #00adb5;

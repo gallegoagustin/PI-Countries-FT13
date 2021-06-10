@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getCountry } from '../../actions';
 import styles from './Search.module.css';
 
-export default function Search(props) {
+function Search(props) {
     const [input, setInput] = React.useState("");
 
     function handleChange (event) {
@@ -11,15 +13,15 @@ export default function Search(props) {
     function handleSubmit(event) {
         event.preventDefault();
         if(input.length === 0) {
-            alert("Please enter something")
+            alert("Please enter a country")
         } else {
-            props.getCountries(input);
+            props.getCountry(input);
         }
     }
 
     return (
         <div className={styles.boxContainer}>
-            <form className={styles.searchForm}>
+            <form className={styles.searchForm} onSubmit={(e) => {handleSubmit(e)}}>
                 <input 
                     className={styles.searchBox} 
                     type="text" 
@@ -36,3 +38,11 @@ export default function Search(props) {
         </div>
     )
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+      getCountry: (input) => dispatch(getCountry(input)),
+    };
+  }
+  
+export default connect(null, mapDispatchToProps)(Search);
