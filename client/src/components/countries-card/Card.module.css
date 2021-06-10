@@ -1,13 +1,14 @@
 .cardContainer {
     background-color: #393e46;
+    max-width: 20em;
     margin: 1em 1em;
+    padding-bottom: 1em;
     display: flex;
     flex-direction: column;
     border-style: solid;
     border-width: 1px;
     border-color: #222831;
     border-radius: 5px;
-    padding-bottom: 1em;
 }
 
 .cardContainer:hover {
@@ -16,9 +17,9 @@
 }
 
 .cardFlag {
-    min-width: 18em;
-    max-width: 18em;
-    height: 12em;
+    min-width: 20em;
+    max-width: 20em;
+    height: 12.5em;
     padding-bottom: 1em;
     border-radius: 5px;
 }

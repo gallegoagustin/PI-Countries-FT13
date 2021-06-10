@@ -7,7 +7,7 @@ const { dbParser } = require('../utils/dbParser');
 module.exports = async(req, res) => {
     await loadCountriesToDb();
     
-    const queryParam = req.query.name;
+    let queryParam = req.query.name;
 
     if(queryParam) {
         const parsedQueryParam = dbParser(queryParam);
@@ -19,16 +19,16 @@ module.exports = async(req, res) => {
                 }
             }
         })
-
-        if(!match.length) {
-            match = await Country.findAll({
+        
+        let match2 = await Country.findAll({
                 where: {
                     name: {
                         [Op.substring]: parsedQueryParam
                     }
                 }
-            })
-        }
+        })
+
+        match = match.concat(match2);
 
         if(!match.length) {
             return res.json({message: 'We could not find any country'})

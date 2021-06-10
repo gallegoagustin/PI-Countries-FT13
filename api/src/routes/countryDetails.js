@@ -1,17 +1,42 @@
-const { Country, Activity } = require('../db');
+const { Country, Activity, country_activity } = require('../db');
 const { dbParser } = require('../utils/dbParser');
 const { loadCountriesToDb } = require('../utils/loadCountriesToDb');
 
 module.exports = async(req, res) => {
     const id = dbParser(req.params.id, true);
+    let activitiesId = [];
+    let activitiesDetail = [];
+    let result = {};
 
     await loadCountriesToDb();
 
-    const dbCountry = await Country.findOne({
+    let dbCountry = await Country.findOne({
         where: {
             id: id
         }
     });
 
-    return res.json(dbCountry);
+    const dbActivities = await country_activity.findAll({
+        where: {
+            countryId: id
+        }
+    });
+
+    for(let i = 0; i < dbActivities.length; i++) {
+        activitiesId.push(dbActivities[i].dataValues.activityId);
+    }
+
+    for(let i = 0; i < activitiesId.length; i++) {
+        const match = await Activity.findOne({
+            where: {
+                id: activitiesId[i]
+            }
+        });
+        const abc = match.dataValues
+        activitiesDetail.push(abc);
+    }
+
+    result = await {...dbCountry.dataValues, activities: activitiesDetail}
+
+    return res.json(result);
 }
