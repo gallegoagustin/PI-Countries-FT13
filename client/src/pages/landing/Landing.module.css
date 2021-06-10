@@ -1,0 +1,10 @@
+.landingContainer {
+    background-image: url('../../assets/world-bkg-desktop.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

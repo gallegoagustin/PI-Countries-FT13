@@ -1,9 +1,12 @@
+import React from 'react';
+import { Route } from 'react-router-dom';
+import Landing from './pages/landing/Landing.jsx';
 import './App.css';
 
 function App() {
   return (
     <div>
-      <h1>hola</h1>
+      <Route path='/' component={Landing}/>
     </div>
   );
 }
