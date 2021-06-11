@@ -15,12 +15,12 @@
 
 .navTitle {
     margin-left: 0.5em;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #eeeeee;
 }
 
 .navIcon {
-    width: 5em;
+    width: 3em;
 }
 
 .navButtton {
@@ -31,7 +31,7 @@
     border-width: 1px;
     border-radius: 5px;
     border-color: #00adb5;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #00adb5;
 }
 
