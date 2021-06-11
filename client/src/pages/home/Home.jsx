@@ -8,7 +8,9 @@ import styles from './Home.module.css';
 function Home(props) {
 
     useEffect(() => {
-        props.getCountries();
+        if(!props.countries.length) {
+            props.getCountries();
+        }
     }, [])
 
     return (
@@ -19,10 +21,16 @@ function Home(props) {
     )
 }
 
+function mapStateToProps(state) {
+    return {
+      countries: state.initialCountries
+    };
+}
+
 function mapDispatchToProps(dispatch) {
     return {
       getCountries: () => dispatch(getCountries()),
     };
-  }
-  
-export default connect(null, mapDispatchToProps)(Home);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
