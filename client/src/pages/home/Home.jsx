@@ -1,6 +1,6 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getCountries } from '../../actions/index.js';
+import { getAllCountries, getCountries } from '../../actions/index.js';
 import Search from '../../components/search-bar/Search.jsx';
 import Row from '../../components/countries-row/Row.jsx';
 import styles from './Home.module.css';
@@ -11,7 +11,12 @@ function Home(props) {
         if(!props.countries.length) {
             props.getCountries();
         }
+        if(!props.allCountries.length) {
+            props.getAllCountries();
+        }
     }, [])
+
+    console.log(props.allCountries)
 
     return (
         <div className={styles.homeContainer}>
@@ -23,13 +28,15 @@ function Home(props) {
 
 function mapStateToProps(state) {
     return {
-      countries: state.initialCountries
+      countries: state.initialCountries,
+      allCountries: state.allCountries
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
       getCountries: () => dispatch(getCountries()),
+      getAllCountries: () => dispatch(getAllCountries())
     };
 }
 

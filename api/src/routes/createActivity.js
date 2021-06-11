@@ -5,11 +5,11 @@ const { dbParser } = require('../utils/dbParser');
 const { loadCountriesToDb } = require('../utils/loadCountriesToDb');
 
 module.exports = async(req, res) => {
-    const name = dbParser(req.body.name);
-    const level = dbParser(req.body.level);
-    const length = req.body.length;
-    const season = dbParser(req.body.season);
-    let countries = dbParser(req.body.countries);
+    const name = await dbParser(req.body.name);
+    const level = await dbParser(req.body.level);
+    const length = await req.body.length;
+    const season = await dbParser(req.body.season);
+    let countries = await dbParser(req.body.countries);
     
     await loadCountriesToDb();
 

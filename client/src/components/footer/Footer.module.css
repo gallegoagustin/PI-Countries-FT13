@@ -16,7 +16,15 @@
     margin: 0.1em 0.4em;
 }
 
+.footerIcon:hover {
+    transform: scale(1.1);
+}
+
 #henry {
     height: 1.5em;
     margin: 0 0.4em;
+}
+
+#henry:hover {
+    transform: scale(1.1);
 }
