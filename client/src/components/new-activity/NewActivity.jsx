@@ -118,7 +118,7 @@ function NewActivity(props) {
                         value={season}
                         className={styles.formBox}
                     >
-                        <option value = "summer" selected>Summer</option>
+                        <option value = "summer" defaultValue selected>Summer</option>
                         <option value = "spring">Spring</option>
                         <option value = "autumn">Autumn</option>
                         <option value = "winter">Winter</option>

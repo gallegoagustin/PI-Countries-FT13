@@ -5,11 +5,9 @@ import styles from './Detail.module.css';
 
 function Detail(props) {
 
-    console.log(props.detail.activities)
-
     return (
         <div className={styles.detailContainer}>
-            <h1>Detailed information for {props.detail.name}</h1>
+            <h1 className={styles.pageTitle}>Detailed information for {props.detail.name}</h1>
             <hr className={styles.separator} />
             <DetailCard />
             <div className={styles.activitiesColumn}>

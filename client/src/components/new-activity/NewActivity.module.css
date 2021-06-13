@@ -1,8 +1,14 @@
 .formContainer {
+    margin-top: 5em;
     background-color: #00adb5;
     padding: 1em;
     border-radius: 5px;
     color: #222831;
+    display: flex;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #222831;
+    border-radius: 5px;
 }
 
 .form {

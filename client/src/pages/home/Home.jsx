@@ -5,18 +5,16 @@ import Search from '../../components/search-bar/Search.jsx';
 import Row from '../../components/countries-row/Row.jsx';
 import styles from './Home.module.css';
 
-function Home(props) {
+export default function Home(props) {
 
-    useEffect(() => {
+    /* useEffect(() => {
         if(!props.countries.length) {
             props.getCountries();
         }
         if(!props.allCountries.length) {
             props.getAllCountries();
         }
-    }, [])
-
-    console.log(props.allCountries)
+    }, []) */
 
     return (
         <div className={styles.homeContainer}>
@@ -26,7 +24,7 @@ function Home(props) {
     )
 }
 
-function mapStateToProps(state) {
+/* function mapStateToProps(state) {
     return {
       countries: state.initialCountries,
       allCountries: state.allCountries
@@ -40,4 +38,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home); */

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getAllCountries, getCountries } from './actions/index.js';
 import Landing from './pages/landing/Landing.jsx';
 import Home from './pages/home/Home.jsx';
 import About from './pages/about/About.jsx';
@@ -9,7 +11,17 @@ import NavBar from './components/nav/NavBar.jsx';
 import Footer from './components/footer/Footer.jsx';
 import './App.css';
 
-function App() {
+function App(props) {
+  
+  useEffect(() => {
+    if(!props.countries.length) {
+        props.getCountries();
+    }
+    if(!props.allCountries.length) {
+        props.getAllCountries();
+    }
+}, [])
+  
   return (
     <div>
       <Route exact path='/' component={Landing}/>
@@ -23,4 +35,18 @@ function App() {
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    countries: state.initialCountries,
+    allCountries: state.allCountries
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getCountries: () => dispatch(getCountries()),
+    getAllCountries: () => dispatch(getAllCountries())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
