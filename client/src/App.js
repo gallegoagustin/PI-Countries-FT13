@@ -13,15 +13,14 @@ import './App.css';
 
 function App(props) {
   
-  useEffect(() => {
-    if(!props.countries.length) {
-        props.getCountries();
-    }
-    if(!props.allCountries.length) {
-        props.getAllCountries();
-    }
-    props.getActivities();
-}, [])
+  useEffect(async() => {
+      if(!props.countries.length)
+      await props.getCountries()
+      if(!props.allCountries.length) {
+        await props.getAllCountries()
+      }
+      await props.getActivities();
+  }, [])
   
   return (
     <div>

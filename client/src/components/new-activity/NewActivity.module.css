@@ -62,3 +62,17 @@
     margin-top: 1em;
     align-self: center;
 }
+
+.success {
+    margin-top: 0.5em;
+    color: #4BB543;
+    background-color: #222831;
+    border-radius: 3px;
+}
+
+.error {
+    margin-top: 0.5em;
+    color: #CC0000;
+    background-color: #222831;
+    border-radius: 3px;
+}

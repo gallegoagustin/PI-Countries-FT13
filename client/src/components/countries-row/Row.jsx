@@ -1,16 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Card from '../countries-card/Card.jsx';
+import Loading from '../loading/Loading.jsx';
 import styles from './Row.module.css';
 
 function Row(props) {
     return (
         <div className={styles.rowContainer}>
-           {
-               props.countries?.map((country) => 
-                <Card key={country.id} flag={country.flag} name={country.name} continent={country.continent} id={country.id}/>
-               )
-           } 
+            {
+                !props.countries.length ? <Loading/> :
+                props.countries?.map((country) => 
+                    <Card key={country.id} flag={country.flag} name={country.name} continent={country.continent} id={country.id}/>
+                )
+            } 
         </div>
     )
 }
