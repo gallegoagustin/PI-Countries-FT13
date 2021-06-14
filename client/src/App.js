@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getAllCountries, getCountries } from './actions/index.js';
+import { getActivities, getAllCountries, getCountries } from './actions/index.js';
 import Landing from './pages/landing/Landing.jsx';
 import Home from './pages/home/Home.jsx';
 import About from './pages/about/About.jsx';
@@ -20,6 +20,7 @@ function App(props) {
     if(!props.allCountries.length) {
         props.getAllCountries();
     }
+    props.getActivities();
 }, [])
   
   return (
@@ -45,7 +46,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getCountries: () => dispatch(getCountries()),
-    getAllCountries: () => dispatch(getAllCountries())
+    getAllCountries: () => dispatch(getAllCountries()),
+    getActivities: () => dispatch(getActivities())
   };
 }
 

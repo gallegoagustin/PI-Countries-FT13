@@ -7,8 +7,10 @@ function Detail(props) {
 
     return (
         <div className={styles.detailContainer}>
-            <h1 className={styles.pageTitle}>Detailed information for {props.detail.name}</h1>
-            <hr className={styles.separator} />
+            <div className={styles.pageHeader}>
+                <h1>Detailed information for {props.detail.name}</h1>
+                <hr className={styles.separator}/>    
+            </div>
             <DetailCard />
             <div className={styles.activitiesColumn}>
                 <p className={styles.activitiesTitle}><strong>Touristic activities</strong></p>
