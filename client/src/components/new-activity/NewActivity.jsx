@@ -11,6 +11,7 @@ function NewActivity(props) {
     const [length, setLength] = React.useState("0");
     const [season, setSeason] = React.useState("summer");
     const [countries, setCountries] = React.useState([]);
+    const [response, setResponse] = React.useState({})
 
     const handleChange = function(event, inputType) {
         if(inputType === "name"){
@@ -41,15 +42,17 @@ function NewActivity(props) {
             setSeason("summer")
         }
 
-        await axios.post('http://localhost:3001/activity', 
-            {     
+        setResponse(await axios({
+            method: 'post',
+            url: 'http://localhost:3001/activity', 
+            data: {     
                 name: name,
                 level: parseInt(level),
                 length: parseInt(length),
                 season: season,
                 countries: countries
             }
-        );
+        }))
         
         setName("");
         setLevel(1);
@@ -143,6 +146,9 @@ function NewActivity(props) {
                     <button className={styles.formButton} onClick={(e) => {clearAll(e)}}>Reset all</button>
                     <button className={styles.formButton} type="submit">Add activity</button>
                 </div>
+                {
+                    response.data === "Activity created" ? <span className={styles.success}>{response.data}</span> : <span className={styles.error}>{response.data}</span>
+                }
                 <span className={styles.alert}>(*) obligatory fields</span>
             </form>
         </div>

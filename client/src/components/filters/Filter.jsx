@@ -98,6 +98,10 @@ function Filter(props) {
 
         let result = activity === "all-activities" ? unfilteredCountries : filteredCountries;
 
+        if(!result.length) {
+            alert("We could not find any country");
+            return;
+        }
         props.filterCountries(result);
     }
 
