@@ -1,9 +1,11 @@
-import { GET_ALL_COUNTRIES, GET_COUNTRIES, GET_COUNTRY_ID, GET_COUNTRY_NAME } from '../actions/index';
+import { FILTER_COUNTRIES, GET_ACTIVITIES, GET_ACTIVITY_COUNTRIES, GET_ALL_COUNTRIES, GET_COUNTRIES, GET_COUNTRY_ID, GET_COUNTRY_NAME } from '../actions/index';
 
 const initialState = {
     initialCountries: [],
     countryDetail: {},
-    allCountries: []
+    allCountries: [],
+    activities: [],
+    activityCountries: []
 };
 
 export default function rootReducer (state = initialState, action) {
@@ -27,6 +29,21 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 allCountries: action.payload
+            }
+        case GET_ACTIVITIES:
+            return {
+                ...state,
+                activities: action.payload
+            }
+        case GET_ACTIVITY_COUNTRIES:
+            return {
+                ...state,
+                activityCountries: action.payload
+            }
+        case FILTER_COUNTRIES:
+            return {
+                ...state,
+                initialCountries: action.payload
             }
         default:
             return state;

@@ -4,6 +4,7 @@ import { getCountry } from '../../actions';
 import styles from './Search.module.css';
 
 function Search(props) {
+    
     const [input, setInput] = React.useState("");
 
     function handleChange (event) {
@@ -11,7 +12,9 @@ function Search(props) {
     }
 
     function handleSubmit(event) {
+
         event.preventDefault();
+
         if(input.length === 0) {
             alert("Please enter a country")
         } else {
@@ -21,7 +24,9 @@ function Search(props) {
 
     return (
         <div className={styles.boxContainer}>
-            <form className={styles.searchForm} onSubmit={(e) => {handleSubmit(e)}}>
+            <form 
+                className={styles.searchForm} 
+                onSubmit={(e) => {handleSubmit(e)}}>
                 <input 
                     className={styles.searchBox} 
                     type="text" 

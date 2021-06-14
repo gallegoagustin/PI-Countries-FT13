@@ -1,41 +1,31 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getAllCountries, getCountries } from '../../actions/index.js';
+import { getActivities } from '../../actions/index.js';
 import Search from '../../components/search-bar/Search.jsx';
+import Filter from '../../components/filters/Filter.jsx';
 import Row from '../../components/countries-row/Row.jsx';
 import styles from './Home.module.css';
 
-export default function Home(props) {
+function Home(props) {
 
-    /* useEffect(() => {
-        if(!props.countries.length) {
-            props.getCountries();
-        }
-        if(!props.allCountries.length) {
-            props.getAllCountries();
-        }
-    }, []) */
+    useEffect(() => {
+        props.getActivities();
+    }, [])
 
     return (
         <div className={styles.homeContainer}>
             <Search/>
+            <p className={styles.filterText}>Or filter/sort by</p>
+            <Filter/>
             <Row/>
         </div>
     )
 }
 
-/* function mapStateToProps(state) {
-    return {
-      countries: state.initialCountries,
-      allCountries: state.allCountries
-    };
-}
-
 function mapDispatchToProps(dispatch) {
     return {
-      getCountries: () => dispatch(getCountries()),
-      getAllCountries: () => dispatch(getAllCountries())
+      getActivities: () => dispatch(getActivities())
     };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home); */
+  }
+  
+  export default connect(null, mapDispatchToProps)(Home);

@@ -1,0 +1,40 @@
+.formContainer {
+    display: flex;
+    margin-top: 0.5em;
+}
+
+.selectButton {
+    margin-left: 0.5em;
+    background-color: transparent;
+    height: 2.2em;
+    width: auto;
+    font-size: 1rem;
+    color: #00adb5;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00adb5;
+    border-radius: 5px; 
+}
+
+.selectButton:hover {
+    background-color: #00adb5;
+    color: #eeeeee;
+}
+
+.searchButton {
+    margin-left: 0.5em;
+    background-color: transparent;
+    height: 2.2em;
+    width: 5em;
+    font-size: 1rem;
+    color: #00adb5;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00adb5;
+    border-radius: 5px; 
+}
+
+.searchButton:hover {
+    background-color: #00adb5;
+    color: #eeeeee;
+}
