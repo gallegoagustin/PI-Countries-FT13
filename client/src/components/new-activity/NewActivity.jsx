@@ -9,7 +9,7 @@ function NewActivity(props) {
     const [name, setName] = React.useState("");
     const [level, setLevel] = React.useState("1");
     const [length, setLength] = React.useState("0");
-    const [season, setSeason] = React.useState("");
+    const [season, setSeason] = React.useState("summer");
     const [countries, setCountries] = React.useState([]);
 
     const handleChange = function(event, inputType) {
