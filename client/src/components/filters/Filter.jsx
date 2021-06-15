@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getActivities, getActivityCountries, getAllCountries, filterCountries } from '../../actions';
+import { getActivities, getActivityCountries, getAllCountries, filterCountries, switchLoading } from '../../actions';
 import styles from './Filter.module.css';
 
 function Filter(props) {
@@ -63,6 +63,8 @@ function Filter(props) {
         
         event.preventDefault();
 
+        await props.switchLoading(true);
+
         if(continent !== "all-continents") {
             unfilteredCountries = unfilteredCountries.filter((country) => country.continent === continent);
         }
@@ -103,6 +105,8 @@ function Filter(props) {
             return;
         }
         props.filterCountries(result);
+
+        await props.switchLoading(false);
     }
 
     return (
@@ -117,7 +121,7 @@ function Filter(props) {
                         value={continent}
                         onChange={(e) => {handleChange(e, "continent")}}
                     >
-                        <option defaultValue selected value="all-continents">All continents</option>
+                        <option defaultValue value="all-continents">All continents</option>
                         <option value = "Africa">Africa</option>
                         <option value = "Americas">Americas</option>
                         <option value = "Asia">Asia</option>
@@ -131,7 +135,7 @@ function Filter(props) {
                         value={name}
                         onChange={(e) => {handleChange(e, "name")}}
                     >
-                        <option defaultValue selected value = "az">Name (A - Z)</option>
+                        <option defaultValue value = "az">Name (A - Z)</option>
                         <option value = "za">Name (Z - A)</option>
                         <option value = "pdown">Population &#9660;</option>
                         <option value = "pup">Population &#9650;</option>
@@ -142,9 +146,9 @@ function Filter(props) {
                         value={activity}
                         onChange={(e) => {handleChange(e, "activity")}}
                     >
-                        <option defaultValue selected value = "all-activities">All activities</option>
+                        <option defaultValue value = "all-activities">All activities</option>
                         {
-                           props.activities.map((activity) => <option  value={activity.name}>{activity.name}</option>) 
+                           props.activities.map((activity) => <option key={activity} value={activity.name}>{activity.name}</option>) 
                         }
                     </select>
                 </div>
@@ -172,7 +176,8 @@ function mapDispatchToProps(dispatch) {
       getActivities: () => dispatch(getActivities()),
       getAllCountries: (type) => dispatch(getAllCountries(type)),
       getActivityCountries: (name) => dispatch(getActivityCountries(name)),
-      filterCountries: (array) => dispatch(filterCountries(array))
+      filterCountries: (array) => dispatch(filterCountries(array)),
+      switchLoading: () => dispatch(switchLoading())
     };
   }
   

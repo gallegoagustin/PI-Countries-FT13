@@ -15,7 +15,7 @@ function Card(props) {
                 Continent: {props.continent}
             </div>
             <div>
-                <Link to={`/detail/${props.id}`} ><a className={styles.seeMore} onClick={() => {props.countryDetail(props.id)}}><strong>See more</strong></a></Link>
+                <Link to={`/detail/${props.id}`} ><a href="#!" className={styles.seeMore} onClick={() => {props.countryDetail(props.id)}}><strong>See more</strong></a></Link>
             </div>
         </div>
     )

@@ -8,6 +8,7 @@ export const POST_ACTIVITY= 'POST_ACTIVITY';
 export const GET_ACTIVITIES= 'GET_ACTIVITIES';
 export const GET_ACTIVITY_COUNTRIES= 'GET_ACTIVITY_COUNTRIES';
 export const FILTER_COUNTRIES= 'FILTER_COUNTRIES';
+export const SWITCH_LOADING= 'SWITCH_LOADING';
 
 
 
@@ -66,5 +67,11 @@ export function filterCountries(array) {
     return async function(dispatch) {
         const countries = await array;
         dispatch({ type: FILTER_COUNTRIES, payload: countries });
+    }
+}
+
+export function switchLoading(boolean) {
+    return function(dispatch) {
+        dispatch({ type: SWITCH_LOADING, payload: boolean })
     }
 }

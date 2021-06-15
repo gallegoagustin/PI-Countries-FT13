@@ -11,14 +11,8 @@ module.exports = async(req, res) => {
     const season = await dbParser(req.body.season);
     let countries = await dbParser(req.body.countries);
     
-    await loadCountriesToDb();
-
-    if(!await countryExistanceCheck(countries)) {
-        return res.json({message: 'Please enter a valid country name'});
-    };
-
     if(await activityExistanceCheck(name, level, length, season)) {
-        return res.json({message: 'The activity already exists'});
+        return res.json('The activity already exists');
     }
 
     const newActivity = await Activity.findOrCreate({

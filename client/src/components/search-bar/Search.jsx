@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getCountry } from '../../actions';
+import { getCountry, switchLoading } from '../../actions';
 import styles from './Search.module.css';
 
 function Search(props) {
@@ -15,11 +15,15 @@ function Search(props) {
 
         event.preventDefault();
 
+        props.switchLoading(true)
+
         if(input.length === 0) {
             alert("Please enter a country")
         } else {
             props.getCountry(input);
         }
+
+        props.switchLoading(false);
     }
 
     return (
@@ -47,6 +51,7 @@ function Search(props) {
 function mapDispatchToProps(dispatch) {
     return {
       getCountry: (input) => dispatch(getCountry(input)),
+      switchLoading: () => dispatch(switchLoading())
     };
   }
   
