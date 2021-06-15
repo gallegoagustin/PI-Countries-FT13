@@ -96,7 +96,7 @@ function NewActivity(props) {
                         value={level}
                         className={styles.formBox}
                     >
-                        <option value = {1} defaultValue selected>1 (no sweat)</option>
+                        <option value = {1} defaultValue>1 (no sweat)</option>
                         <option value = {2}>2 (slight)</option>
                         <option value = {3}>3 (regular)</option>
                         <option value = {4}>4 (heavy)</option>
@@ -121,7 +121,7 @@ function NewActivity(props) {
                         value={season}
                         className={styles.formBox}
                     >
-                        <option value = "summer" defaultValue selected>Summer</option>
+                        <option value = "summer" defaultValue>Summer</option>
                         <option value = "spring">Spring</option>
                         <option value = "autumn">Autumn</option>
                         <option value = "winter">Winter</option>
@@ -136,7 +136,7 @@ function NewActivity(props) {
                     >
                         {
                             props.allCountries?.map((country) =>
-                                <option value = {country.name}>{country.name}</option>
+                                <option key={country.name} value = {country.name}>{country.name}</option>
                             )
                         }
                     </select>

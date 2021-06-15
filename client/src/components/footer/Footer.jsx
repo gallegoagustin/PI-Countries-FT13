@@ -9,9 +9,9 @@ export default function Footer() {
         <div className={styles.footerContainer}>
                 <p>AGUSTIN GALLEGO</p>
                 <div className={styles.iconsContainer}>
-                    <a target="_blank" href="https://www.linkedin.com/in/agustin-gallego/"><img className={styles.footerIcon} src={Linkedin} alt="linkedin"/></a>
-                    <a target="_blank" href="https://github.com/gallegoagustin"><img className={styles.footerIcon} src={Git} alt="git"/></a>
-                    <a target="_blank" href="https://www.soyhenry.com/"><img id={styles.henry} src={Henry} alt="henry"/></a>
+                    <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/agustin-gallego/"><img className={styles.footerIcon} src={Linkedin} alt="linkedin"/></a>
+                    <a target="_blank" rel="noreferrer" href="https://github.com/gallegoagustin"><img className={styles.footerIcon} src={Git} alt="git"/></a>
+                    <a target="_blank" rel="noreferrer" href="https://www.soyhenry.com/"><img id={styles.henry} src={Henry} alt="henry"/></a>
                 </div>
         </div>
     )

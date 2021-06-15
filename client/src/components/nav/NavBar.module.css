@@ -23,7 +23,7 @@
     width: 3em;
 }
 
-.navButtton {
+.navButtton:link, .navButtton:visited, .navButtton:active {
     background-color: transparent;
     padding: 2px 4px;
     margin: 0 5px;
