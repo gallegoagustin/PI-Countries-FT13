@@ -1,4 +1,8 @@
 .homeContainer {
+    background-image: url('../../assets/wave.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     min-height: 85vh;
     display: flex;
     flex-direction: column;
@@ -8,4 +12,14 @@
 
 .filterText {
     margin-top: 0.5em;
+}
+
+@media (max-width: 768px) {
+    .homeContainer {
+        background-image: none;
+        background-repeat: none;
+        background-size: none;
+        background-attachment: none;
+        background-color: #EEEEEE;
+    }
 }

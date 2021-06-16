@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Card from '../countries-card/Card.jsx';
 import Loading from '../loading/Loading.jsx';
@@ -18,7 +18,7 @@ function Row(props) {
             <div className={styles.rowContainer}>
                 {
                     props.loading === true ? <Loading/> :
-                    currentCountries.map((country) => 
+                    currentCountries?.map((country) => 
                         <Card key={country.id} flag={country.flag} name={country.name} continent={country.continent} id={country.id}/>
                     )
                 }

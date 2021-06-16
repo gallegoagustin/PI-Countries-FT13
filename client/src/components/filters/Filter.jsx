@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { getActivities, getActivityCountries, getAllCountries, filterCountries, switchLoading, changePage } from '../../actions';
+import { getAllCountries, filterCountries, switchLoading, changePage } from '../../actions';
 import styles from './Filter.module.css';
 
 function Filter(props) {
@@ -10,9 +10,6 @@ function Filter(props) {
         activity: "all-activities",
         continent: "all-continents"
     })
-
-    let unfilteredCountries = props.allCountries;
-    let filteredCountries = [];
 
     function numberSortAscending(list) {
 
@@ -53,21 +50,29 @@ function Filter(props) {
     }
 
     function handleSubmit(event) {
-        
+
         event.preventDefault();
+        
+        props.switchLoading(true)
 
         props.changePage(1);
+
+        let unfilteredCountries = [...props.allCountries];
 
         if(state.continent !== "all-continents") {
             unfilteredCountries = unfilteredCountries.filter((country) => country.continent === state.continent);
         }
 
+        let filteredCountries = [];
+
         if(state.activity !== "all-activities") {
-            props.getActivityCountries(state.activity);
-            let countries = props.activityCountries;
             for(let i = 0; i < unfilteredCountries.length; i++) {
-                if(countries.indexOf(unfilteredCountries[i].name) !== -1) {
-                    filteredCountries.push(unfilteredCountries[i])
+                if(unfilteredCountries[i].activities.length) {
+                    for(let j = 0; j < unfilteredCountries[i].activities.length; j++) {
+                        if(unfilteredCountries[i].activities[j].name === state.activity) {
+                            filteredCountries.push(unfilteredCountries[i]);
+                        }
+                    }
                 }
             }
         }
@@ -93,11 +98,9 @@ function Filter(props) {
         
         let result = state.activity === "all-activities" ? unfilteredCountries : filteredCountries;
         
-        if(!result.length) {
-            alert("We could not find any country");
-            return;
-        }
         props.filterCountries(result);
+
+        props.switchLoading(false)
     }
 
     return (
@@ -165,11 +168,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-      getActivities: () => dispatch(getActivities()),
-      getAllCountries: (type) => dispatch(getAllCountries(type)),
-      getActivityCountries: (name) => dispatch(getActivityCountries(name)),
+      getAllCountries: () => dispatch(getAllCountries()),
       filterCountries: (array) => dispatch(filterCountries(array)),
-      changePage: (number) => dispatch(changePage(number))
+      changePage: (number) => dispatch(changePage(number)),
+      switchLoading: (boolean) => dispatch(switchLoading(boolean))
     };
 }
   

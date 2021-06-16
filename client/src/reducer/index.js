@@ -1,8 +1,7 @@
 import { 
     CHANGE_PAGE,
     FILTER_COUNTRIES, 
-    GET_ACTIVITIES, 
-    GET_ACTIVITY_COUNTRIES, 
+    GET_ACTIVITIES,
     GET_ALL_COUNTRIES, 
     GET_COUNTRIES, 
     GET_COUNTRY_ID, 
@@ -15,7 +14,6 @@ const initialState = {
     countryDetail: {},
     allCountries: [],
     activities: [],
-    activityCountries: [],
     loading: true,
     currentPage: 1
 };
@@ -46,11 +44,6 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 activities: action.payload
-            }
-        case GET_ACTIVITY_COUNTRIES:
-            return {
-                ...state,
-                activityCountries: action.payload
             }
         case FILTER_COUNTRIES:
             return {

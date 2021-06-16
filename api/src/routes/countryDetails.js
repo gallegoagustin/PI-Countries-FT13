@@ -29,8 +29,7 @@ module.exports = async(req, res) => {
                 id: activitiesId[i]
             }
         });
-        const abc = match.dataValues
-        activitiesDetail.push(abc);
+        activitiesDetail.push(match.dataValues);
     }
 
     result = await {...dbCountry.dataValues, activities: activitiesDetail}

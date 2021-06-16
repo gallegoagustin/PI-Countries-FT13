@@ -11,11 +11,6 @@ module.exports = async(req, res) => {
 
     if(queryParam) {
 
-        if(queryParam === 'all') {
-                const match = await Country.findAll();
-                return res.json(match);
-            }
-
         const parsedQueryParam = dbParser(queryParam);
         
         let match = await Country.findAll({

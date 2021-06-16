@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { getAllCountries } from '../../actions';
 import styles from './NewActivity.module.css';
 
 const axios = require('axios').default;
@@ -61,6 +62,8 @@ function NewActivity(props) {
                 countries: countries
             }
         }))
+
+        await props.getAllCountries();
         
         clearAll(event);
     }
@@ -157,4 +160,10 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, null)(NewActivity);
+function mapDispatchToProps(dispatch) {
+    return {
+      getAllCountries: () => dispatch(getAllCountries()),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewActivity);

@@ -6,7 +6,6 @@ export const GET_COUNTRY_ID= 'GET_COUNTRY_ID';
 export const GET_ALL_COUNTRIES= 'GET_ALL_COUNTRIES';
 export const POST_ACTIVITY= 'POST_ACTIVITY';
 export const GET_ACTIVITIES= 'GET_ACTIVITIES';
-export const GET_ACTIVITY_COUNTRIES= 'GET_ACTIVITY_COUNTRIES';
 export const FILTER_COUNTRIES= 'FILTER_COUNTRIES';
 export const SWITCH_LOADING= 'SWITCH_LOADING';
 export const CHANGE_PAGE= 'CHANGE_PAGE';
@@ -42,7 +41,7 @@ export function countryDetail(id) {
 
 export function getAllCountries() {
     return async function(dispatch) {
-        const response = await axios.get(`http://localhost:3001/countries?name=all`);
+        const response = await axios.get(`http://localhost:3001/resume`);
         const countries = response.data;
         dispatch({ type: GET_ALL_COUNTRIES, payload: countries });
     }
@@ -53,14 +52,6 @@ export function getActivities() {
         const response = await axios.get('http://localhost:3001/activities');
         const activities = response.data;
         dispatch({ type: GET_ACTIVITIES, payload: activities });
-    }
-}
-
-export function getActivityCountries(name) {
-    return async function(dispatch) {
-        const response = await axios.get(`http://localhost:3001/activities?name=${name}`);
-        const countries = response.data;
-        dispatch({ type: GET_ACTIVITY_COUNTRIES, payload: countries });
     }
 }
 

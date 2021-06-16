@@ -1,4 +1,8 @@
 .aboutContainer {
+    background-image: url('../../assets/wave.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     height: 85vh;
     display: flex;
     flex-direction: column;
@@ -21,10 +25,9 @@
 
 .textBox {
     max-width: 50%;
-    background-color: #00adb5;
+    background-color: transparent;
     padding: 1em;
     border-radius: 5px;
-    color: #222831;
     border-style: solid;
     border-width: 1px;
     border-color: #222831;

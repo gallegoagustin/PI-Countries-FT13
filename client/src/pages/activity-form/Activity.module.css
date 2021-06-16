@@ -1,4 +1,8 @@
 .activityContainer {
+    background-image: url('../../assets/wave.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     min-height: 85vh;
     display: flex;
     flex-direction: column;
