@@ -40,3 +40,23 @@
     list-style: none;
     padding-left: 1em;
 }
+
+@media (max-width: 768px) {
+    .aboutContainer {
+        height: auto;
+    }
+
+    .aboutTitle {
+        margin-top: 1em;
+    }
+
+    .textBox {
+        max-width: 80%;
+        margin: 1em 0;
+        text-align: left;
+    }
+
+    .separator {
+        width: 100%;
+    }
+}
