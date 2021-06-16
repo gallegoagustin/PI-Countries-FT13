@@ -1,4 +1,14 @@
-import { FILTER_COUNTRIES, GET_ACTIVITIES, GET_ACTIVITY_COUNTRIES, GET_ALL_COUNTRIES, GET_COUNTRIES, GET_COUNTRY_ID, GET_COUNTRY_NAME, SWITCH_LOADING } from '../actions/index';
+import { 
+    CHANGE_PAGE,
+    FILTER_COUNTRIES, 
+    GET_ACTIVITIES, 
+    GET_ACTIVITY_COUNTRIES, 
+    GET_ALL_COUNTRIES, 
+    GET_COUNTRIES, 
+    GET_COUNTRY_ID, 
+    GET_COUNTRY_NAME, 
+    SWITCH_LOADING 
+} from '../actions/index';
 
 const initialState = {
     initialCountries: [],
@@ -6,7 +16,8 @@ const initialState = {
     allCountries: [],
     activities: [],
     activityCountries: [],
-    loading: false
+    loading: true,
+    currentPage: 1
 };
 
 export default function rootReducer (state = initialState, action) {
@@ -50,6 +61,11 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 loading: action.payload
+            }
+        case CHANGE_PAGE:
+            return {
+                ...state,
+                currentPage: action.payload
             }
         default:
             return state;

@@ -1,15 +1,13 @@
 const { Activity, Country } = require('../db');
 const { activityExistanceCheck } = require('../utils/activityExistanceCheck');
-const { countryExistanceCheck } = require('../utils/countryExistanceCheck');
 const { dbParser } = require('../utils/dbParser');
-const { loadCountriesToDb } = require('../utils/loadCountriesToDb');
 
 module.exports = async(req, res) => {
     const name = await dbParser(req.body.name);
     const level = await dbParser(req.body.level);
     const length = await req.body.length;
     const season = await dbParser(req.body.season);
-    let countries = await dbParser(req.body.countries);
+    let countries = req.body.countries;
     
     if(await activityExistanceCheck(name, level, length, season)) {
         return res.json('The activity already exists');

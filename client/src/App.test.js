@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import About from './pages/about/About.jsx';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+test('renders about title', () => {
+  render(<About />);
+  expect(screen.getAllByText('About Countries App')).toHaveLength(1)
+})

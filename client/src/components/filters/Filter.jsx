@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { getActivities, getActivityCountries, getAllCountries, filterCountries, switchLoading } from '../../actions';
+import { getActivities, getActivityCountries, getAllCountries, filterCountries, switchLoading, changePage } from '../../actions';
 import styles from './Filter.module.css';
 
 function Filter(props) {
 
-    const [continent, setContinent] = React.useState("all-continents");
-    const [name, setName] = React.useState("az");
-    const [activity, setActivity] = React.useState("all-activities");
+    const [state, setState] = useState({
+        name: "az",
+        activity: "all-activities",
+        continent: "all-continents"
+    })
 
     let unfilteredCountries = props.allCountries;
     let filteredCountries = [];
@@ -20,7 +22,6 @@ function Filter(props) {
     }
 
     function numberSortDescending(list) {
-
         list.sort((a, b) => {
             return b.population - a.population
         })
@@ -29,6 +30,7 @@ function Filter(props) {
     function stringSortDescending(list) {
 
         list.sort((a, b) => {
+            
             let fa = a.name.toLowerCase(),
                 fb = b.name.toLowerCase();
         
@@ -39,39 +41,30 @@ function Filter(props) {
             if (fa < fb) {
                 return 1;
             }
-
             return 0;
         });
     }
 
-    function handleChange(event, type) {
-
-        if(type === "continent") {
-            setContinent(event.target.value);
-        }
-
-        if(type === "name") {
-            setName(event.target.value);
-        }
-
-        if(type === "activity") {
-            setActivity(event.target.value);
-        }
+    function handleChange(event) {
+        setState({
+            ...state,
+            [event.target.name]: event.target.value
+        })
     }
 
-    async function handleSubmit(event) {
+    function handleSubmit(event) {
         
         event.preventDefault();
 
-        await props.switchLoading(true);
+        props.changePage(1);
 
-        if(continent !== "all-continents") {
-            unfilteredCountries = unfilteredCountries.filter((country) => country.continent === continent);
+        if(state.continent !== "all-continents") {
+            unfilteredCountries = unfilteredCountries.filter((country) => country.continent === state.continent);
         }
 
-        if(activity !== "all-activities") {
-            await props.getActivityCountries(activity);
-            const countries = await props.activityCountries;
+        if(state.activity !== "all-activities") {
+            props.getActivityCountries(state.activity);
+            let countries = props.activityCountries;
             for(let i = 0; i < unfilteredCountries.length; i++) {
                 if(countries.indexOf(unfilteredCountries[i].name) !== -1) {
                     filteredCountries.push(unfilteredCountries[i])
@@ -79,47 +72,46 @@ function Filter(props) {
             }
         }
 
-        if(name !== "az") {
+        if(state.name !== "az") {
 
-            if(name === "za") {
+            if(state.name === "za") {
                 stringSortDescending(filteredCountries);
                 stringSortDescending(unfilteredCountries);
-
+                
             }
 
-            if(name === "pdown") {
+            if(state.name === "pdown") {
                 numberSortDescending(filteredCountries);
                 numberSortDescending(unfilteredCountries);
             }
 
-            if(name === "pup") {
+            if(state.name === "pup") {
                 numberSortAscending(filteredCountries);
                 numberSortAscending(unfilteredCountries);
             }
         }
-
-        let result = activity === "all-activities" ? unfilteredCountries : filteredCountries;
-
+        
+        let result = state.activity === "all-activities" ? unfilteredCountries : filteredCountries;
+        
         if(!result.length) {
             alert("We could not find any country");
             return;
         }
         props.filterCountries(result);
-
-        await props.switchLoading(false);
     }
 
     return (
         <div>
-            <form className={styles.formContainer}
-            onSubmit={(e) => {handleSubmit(e)}}
+            <form 
+                className={styles.formContainer}
+                onSubmit={(e) => {handleSubmit(e)}}
             >
-            <div>
+            <div className={styles.selectButtons}>
                     <select 
                         name="continent" 
                         className={styles.selectButton}
-                        value={continent}
-                        onChange={(e) => {handleChange(e, "continent")}}
+                        value={state.continent}
+                        onChange={(e) => {handleChange(e)}}
                     >
                         <option defaultValue value="all-continents">All continents</option>
                         <option value = "Africa">Africa</option>
@@ -132,8 +124,8 @@ function Filter(props) {
                     <select 
                         name="name" 
                         className={styles.selectButton}
-                        value={name}
-                        onChange={(e) => {handleChange(e, "name")}}
+                        value={state.name}
+                        onChange={(e) => {handleChange(e)}}
                     >
                         <option defaultValue value = "az">Name (A - Z)</option>
                         <option value = "za">Name (Z - A)</option>
@@ -141,10 +133,10 @@ function Filter(props) {
                         <option value = "pup">Population &#9650;</option>
                     </select>
                     <select 
-                        name="activities" 
+                        name="activity" 
                         className={styles.selectButton}
-                        value={activity}
-                        onChange={(e) => {handleChange(e, "activity")}}
+                        value={state.activity}
+                        onChange={(e) => {handleChange(e)}}
                     >
                         <option defaultValue value = "all-activities">All activities</option>
                         {
@@ -177,8 +169,8 @@ function mapDispatchToProps(dispatch) {
       getAllCountries: (type) => dispatch(getAllCountries(type)),
       getActivityCountries: (name) => dispatch(getActivityCountries(name)),
       filterCountries: (array) => dispatch(filterCountries(array)),
-      switchLoading: () => dispatch(switchLoading())
+      changePage: (number) => dispatch(changePage(number))
     };
-  }
+}
   
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

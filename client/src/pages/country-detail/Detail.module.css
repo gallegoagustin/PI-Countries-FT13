@@ -7,6 +7,7 @@
 }
 
 .pageHeader {
+    margin-top: 1em;
     text-align: center;
 }
 
@@ -61,4 +62,23 @@
     border-width: 1px;
     border-color: #222831;
     border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .separator {
+        display: none;
+    }
+
+    .pageHeader {
+        margin-bottom: 1em;
+    }
+
+    .activitiesContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .emptyList {
+        
+    }
 }

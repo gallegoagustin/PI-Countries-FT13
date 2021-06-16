@@ -9,6 +9,7 @@ export const GET_ACTIVITIES= 'GET_ACTIVITIES';
 export const GET_ACTIVITY_COUNTRIES= 'GET_ACTIVITY_COUNTRIES';
 export const FILTER_COUNTRIES= 'FILTER_COUNTRIES';
 export const SWITCH_LOADING= 'SWITCH_LOADING';
+export const CHANGE_PAGE= 'CHANGE_PAGE';
 
 
 
@@ -73,5 +74,11 @@ export function filterCountries(array) {
 export function switchLoading(boolean) {
     return function(dispatch) {
         dispatch({ type: SWITCH_LOADING, payload: boolean })
+    }
+}
+
+export function changePage(number) {
+    return function(dispatch) {
+        dispatch({ type: CHANGE_PAGE, payload:  number})
     }
 }

@@ -38,3 +38,21 @@
     background-color: #00adb5;
     color: #eeeeee;
 }
+
+@media (max-width: 768px) {
+    .formContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0.5em;
+    }
+
+    .selectButtons{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .selectButton {
+        margin: 0.5em 0;
+    }
+}

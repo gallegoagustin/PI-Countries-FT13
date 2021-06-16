@@ -1,14 +1,11 @@
 const { Country, Activity, country_activity } = require('../db');
 const { dbParser } = require('../utils/dbParser');
-const { loadCountriesToDb } = require('../utils/loadCountriesToDb');
 
 module.exports = async(req, res) => {
     const id = dbParser(req.params.id, true);
     let activitiesId = [];
     let activitiesDetail = [];
     let result = {};
-
-    await loadCountriesToDb();
 
     let dbCountry = await Country.findOne({
         where: {

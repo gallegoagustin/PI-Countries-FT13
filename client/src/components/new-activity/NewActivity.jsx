@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styles from './NewActivity.module.css';
 
@@ -6,73 +6,63 @@ const axios = require('axios').default;
 
 function NewActivity(props) {
 
-    const [name, setName] = React.useState("");
-    const [level, setLevel] = React.useState("1");
-    const [length, setLength] = React.useState("0");
-    const [season, setSeason] = React.useState("summer");
-    const [countries, setCountries] = React.useState([]);
-    const [response, setResponse] = React.useState({})
+    const [state, setState] = useState({
+        name: "",
+        level: 1,
+        length: 1,
+        season: "summer",
+    });
 
-    const handleChange = function(event, inputType) {
-        if(inputType === "name"){
-            setName(event.target.value);
-        }
-        if(inputType === "level"){
-            setLevel(event.target.value);
-        }
-        if(inputType === "length"){
-            setLength(event.target.value);
-        }
-        if(inputType === "season"){
-            setSeason(event.target.value);
-        }
-        if(inputType === "countries"){
-            setCountries([...countries, event.target.value]);
-        }
-    }
+    const [countries, setCountries] = useState([]);
 
-    async function handleSubmit(event) {
-        event.preventDefault();
-        
-        if(!name.length){
-            return alert("Please enter a valid name")
-        }
-
-        if(!season.length) {
-            setSeason("summer")
-        }
-
-        setResponse(await axios({
-            method: 'post',
-            url: 'http://localhost:3001/activity', 
-            data: {     
-                name: name,
-                level: parseInt(level),
-                length: parseInt(length),
-                season: season,
-                countries: countries
-            }
-        }))
-        
-        setName("");
-        setLevel(1);
-        setLength(1);
-        setSeason("summer");
-        setCountries([]);
-    }
+    const [response, setResponse] = useState({});
 
     function clearAll(event) {
         event.preventDefault();
-        setName("");
-        setLevel(1);
-        setLength(1);
-        setSeason("summer");
+        setState({
+            name: "",
+            level: 1,
+            length: 1,
+            season: "summer"
+        })
         setCountries([]);
     }
 
     function clearCountries(event) {
         event.preventDefault();
         setCountries([]);
+    }
+
+    async function handleChange(event) {
+        if(event.target.name === "countries"){
+            setCountries([...countries, event.target.value])  
+        }
+        setState({
+            ...state,
+            [event.target.name]: await event.target.value
+        })
+    }
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        
+        if(!state.name.length){
+            return alert("Please enter a valid name")
+        }
+
+        setResponse(await axios({
+            method: 'post',
+            url: 'http://localhost:3001/activity', 
+            data: {     
+                name: state.name,
+                level: parseInt(state.level),
+                length: parseInt(state.length),
+                season: state.season,
+                countries: countries
+            }
+        }))
+        
+        clearAll(event);
     }
 
     return (
@@ -83,17 +73,19 @@ function NewActivity(props) {
                         Name*:
                     </label>
                     <input
+                        name="name"
                         className={styles.formBox}
-                        onChange={(e) => {handleChange(e, "name")}}
-                        value={name}
+                        onChange={(e) => {handleChange(e)}}
+                        value={state.name}
                         placeholder="Example: Trecking"
                     />
                 </div>
                 <div className={styles.formSet}>
                     <label className={styles.formTitles} htmlFor="level">Level*:</label>
-                    <select name="level"
-                        onChange={(e) => {handleChange(e, "level")}}
-                        value={level}
+                    <select 
+                        name="level"
+                        onChange={(e) => {handleChange(e)}}
+                        value={state.level}
                         className={styles.formBox}
                     >
                         <option value = {1} defaultValue>1 (no sweat)</option>
@@ -108,17 +100,19 @@ function NewActivity(props) {
                         Length* (hours):
                     </label>
                     <input
+                        name="length"
                         type="number"
-                        onChange={(e) => {handleChange(e, "length")}}
-                        value={length}
+                        onChange={(e) => {handleChange(e)}}
+                        value={state.length}
                         className={styles.formBox}
                     />
                 </div>
                 <div className={styles.formSet}>
                     <label className={styles.formTitles} htmlFor="season">Season*:</label>
-                    <select name="season"
-                        onChange={(e) => {handleChange(e, "season")}}
-                        value={season}
+                    <select 
+                        name="season"
+                        onChange={(e) => {handleChange(e)}}
+                        value={state.season}
                         className={styles.formBox}
                     >
                         <option value = "summer" defaultValue>Summer</option>
@@ -129,8 +123,10 @@ function NewActivity(props) {
                 </div>
                 <div className={styles.formSet}>
                     <label className={styles.formTitles} htmlFor="countries">Countries:</label>
-                    <select name="cuntries" multiple
-                        onChange={(e) => {handleChange(e, "countries")}}
+                    <select 
+                        name="countries" 
+                        multiple
+                        onChange={(e) => {handleChange(e)}}
                         value={countries}
                         className={styles.formBox}
                     >
