@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { changePage } from '../../actions';
 import styles from './Pagination.module.css';
 
-export default function Pagination(props) {
+function Pagination(props) {
 
     const pages = [];
 
@@ -19,3 +21,17 @@ export default function Pagination(props) {
         </ul>
     )
 }
+
+function mapStateToProps(state) {
+    return {
+      currentPage: state.currentPage
+    }; 
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+      changePage: (number) => dispatch(changePage(number))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pagination);

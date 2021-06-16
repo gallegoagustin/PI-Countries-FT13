@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Card from '../countries-card/Card.jsx';
 import Loading from '../loading/Loading.jsx';
@@ -7,22 +7,11 @@ import styles from './Row.module.css';
 
 function Row(props) {
 
-    const [state, setState] = useState({
-        countries: [],
-        currentPage: 1,
-        countriesPerPage: 10
-    });
+    const countriesPerPage = 10;
 
-    const lastCountry =  state.currentPage * state.countriesPerPage;
-    const firstCountry = lastCountry - state.countriesPerPage;
+    const lastCountry =  props.currentPage * countriesPerPage;
+    const firstCountry = lastCountry - countriesPerPage;
     const currentCountries = props.countries?.slice(firstCountry, lastCountry);
-
-    function changePage(number) {
-        setState({
-            ...state,
-            currentPage: number
-        })
-    }
 
     return (
         <div>
@@ -34,7 +23,7 @@ function Row(props) {
                     )
                 }
             </div>
-            <Pagination countriesPerPage={state.countriesPerPage} totalCountries={props.countries.length} currentPage={state.currentPage} changePage={changePage}/>
+            <Pagination countriesPerPage={countriesPerPage} totalCountries={props.countries.length}/>
         </div>
     )
 }
@@ -42,7 +31,8 @@ function Row(props) {
 function mapStateToProps(state) {
     return {
       countries: state.initialCountries,
-      loading: state.loading
+      loading: state.loading,
+      currentPage: state.currentPage
     }; 
 }
 

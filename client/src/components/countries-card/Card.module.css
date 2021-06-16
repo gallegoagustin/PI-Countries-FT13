@@ -40,3 +40,14 @@
     text-decoration: none;
     color: #fff;
 }
+
+@media (max-width: 768px) {
+    .cardContainer {
+        max-width: 70%;
+    }
+
+    .cardFlag {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}

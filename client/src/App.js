@@ -14,15 +14,16 @@ import './App.css';
 function App(props) {
   
   useEffect(() => {
-      const start = async () => {
+    const start = async () => {
         await props.getCountries();
         await props.getAllCountries();
+        props.switchLoading(false);
       }
       start();
   }, [])
   
   return (
-    <div>
+    <>
       <Route exact path='/' component={Landing}/>
       <Route path='/:s' component={NavBar}/>
       <Route path='/home' component={Home}/>
@@ -30,16 +31,8 @@ function App(props) {
       <Route path='/detail/:id' component={Detail}/>
       <Route path='/activity' component={Activity}/>
       <Route path='/:s' component={Footer}/>
-    </div>
+    </>
   );
-}
-
-function mapStateToProps(state) {
-  return {
-    countries: state.initialCountries,
-    allCountries: state.allCountries,
-    prueba: state.loading
-  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -51,4 +44,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

@@ -4,3 +4,11 @@
     justify-content: space-evenly;
     margin-top: 2em;
 }
+
+@media (max-width: 768px) {
+    .rowContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

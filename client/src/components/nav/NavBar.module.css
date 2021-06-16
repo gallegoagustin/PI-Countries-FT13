@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 1em;
 }
 
 .titleContainer {
@@ -38,4 +38,13 @@
 .navButtton:hover {
     background-color: #00adb5;
     color: #393e46;
+}
+
+@media (max-width: 768px) {
+    .navContainer {
+        width: 100vp;
+        height: 30vh;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
 }
