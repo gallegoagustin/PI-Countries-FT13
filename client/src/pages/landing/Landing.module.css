@@ -8,3 +8,8 @@
     align-items: center;
 }
 
+@media (max-width: 768px) {
+    .landingContainer {
+        background-image: url('../../assets/world-bkg-mobile.jpg');
+    }
+}

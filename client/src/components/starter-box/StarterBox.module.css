@@ -34,3 +34,12 @@
     background-color: #222831;
     color: #00adb5;
 }
+
+@media (max-width: 768px) {
+    .boxContainer {
+        background-color: #00adb5;
+        color: #222831;
+        min-height: 75%;
+        width: 80%;
+    }
+}
