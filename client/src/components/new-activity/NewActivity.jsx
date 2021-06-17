@@ -132,6 +132,7 @@ function NewActivity(props) {
                         onChange={(e) => {handleChange(e)}}
                         value={countries}
                         className={styles.formBox}
+                        id={styles.boxHeight}
                     >
                         {
                             props.allCountries?.map((country) =>

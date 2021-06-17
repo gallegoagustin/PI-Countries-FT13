@@ -1,16 +1,14 @@
-const axios = require('axios').default;
+import axios from 'axios';
 
-export const GET_COUNTRIES= 'GET_COUNTRIES';
-export const GET_COUNTRY_NAME= 'GET_COUNTRY_NAME';
-export const GET_COUNTRY_ID= 'GET_COUNTRY_ID';
-export const GET_ALL_COUNTRIES= 'GET_ALL_COUNTRIES';
-export const POST_ACTIVITY= 'POST_ACTIVITY';
-export const GET_ACTIVITIES= 'GET_ACTIVITIES';
-export const FILTER_COUNTRIES= 'FILTER_COUNTRIES';
-export const SWITCH_LOADING= 'SWITCH_LOADING';
-export const CHANGE_PAGE= 'CHANGE_PAGE';
-
-
+export const GET_COUNTRIES = 'GET_COUNTRIES';
+export const GET_COUNTRY_NAME = 'GET_COUNTRY_NAME';
+export const GET_COUNTRY_ID = 'GET_COUNTRY_ID';
+export const GET_ALL_COUNTRIES = 'GET_ALL_COUNTRIES';
+export const POST_ACTIVITY = 'POST_ACTIVITY';
+export const GET_ACTIVITIES = 'GET_ACTIVITIES';
+export const FILTER_COUNTRIES = 'FILTER_COUNTRIES';
+export const SWITCH_LOADING = 'SWITCH_LOADING';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
 
 export function getCountries() {
     return async function(dispatch) {

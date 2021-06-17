@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Card from '../countries-card/Card.jsx';
 import Loading from '../loading/Loading.jsx';
+import NoCountries from '../no-countries/NoCountries.jsx';
 import Pagination from '../pagination/Pagination.jsx';
 import styles from './Row.module.css';
 
@@ -17,7 +18,10 @@ function Row(props) {
         <div>
             <div className={styles.rowContainer}>
                 {
-                    props.loading === true ? <Loading/> :
+                    props.loading === true ? <Loading/> : 
+                    
+                    !currentCountries.length ? <NoCountries/> :
+                    
                     currentCountries?.map((country) => 
                         <Card key={country.id} flag={country.flag} name={country.name} continent={country.continent} id={country.id}/>
                     )

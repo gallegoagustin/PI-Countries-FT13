@@ -54,6 +54,10 @@
     border-color: #222831;
 }
 
+#boxHeight {
+    height: 10em;
+}
+
 .alert {
     font-size: 0.75rem;
     margin-top: 1em;

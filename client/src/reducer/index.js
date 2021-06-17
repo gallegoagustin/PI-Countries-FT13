@@ -7,7 +7,7 @@ import {
     GET_COUNTRY_ID, 
     GET_COUNTRY_NAME, 
     SWITCH_LOADING 
-} from '../actions/index';
+} from '../actions/index.js';
 
 const initialState = {
     initialCountries: [],
