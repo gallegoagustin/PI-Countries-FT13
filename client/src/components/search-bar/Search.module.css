@@ -1,5 +1,11 @@
-.searchForm {
+.boxContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 1em;
+}
+
+.searchForm {
     display: flex;
     justify-content: space-between;
 }
@@ -35,6 +41,16 @@
     color: #eeeeee;
 }
 
+#dice {
+    font-size: 2em;
+    color: #00adb5;
+    margin-left: 0.5em;
+
+    -webkit-animation:rotate 4s linear infinite;
+    -moz-animation:rotate 4s linear infinite;
+    animation:rotate 4s linear infinite;
+}
+
 @media (max-width: 768px) {
     .searchForm {
         height: 5em;
@@ -43,4 +59,16 @@
         align-items: center;
         justify-content: space-between;
     }
+
+    .boxContainer {
+        flex-direction: column;
+    }
+
+    #dice {
+        margin-top: 0.5em;
+    }
 }
+
+@-moz-keyframes rotate { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes rotate { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes rotate { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

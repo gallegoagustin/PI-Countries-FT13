@@ -54,9 +54,8 @@ export function getActivities() {
 }
 
 export function filterCountries(array) {
-    return async function(dispatch) {
-        const countries = await array;
-        dispatch({ type: FILTER_COUNTRIES, payload: countries });
+    return function(dispatch) {
+        dispatch({ type: FILTER_COUNTRIES, payload: array });
     }
 }
 
