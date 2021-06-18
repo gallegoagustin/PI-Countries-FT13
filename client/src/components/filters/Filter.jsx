@@ -6,21 +6,21 @@ import styles from './Filter.module.css';
 function Filter(props) {
 
     const [state, setState] = useState({
-        name: "az",
+        order: "az",
         activity: "all-activities",
-        continent: "all-continents"
+        continent: "all-continents",
     })
 
-    function numberSortAscending(list) {
+    function numberSortAscending(list, type) {
 
         list.sort((a, b) => {
-            return a.population - b.population
+            return a[type] - b[type]
         })
     }
 
-    function numberSortDescending(list) {
+    function numberSortDescending(list, type) {
         list.sort((a, b) => {
-            return b.population - a.population
+            return b[type] - a[type]
         })
     }
 
@@ -53,7 +53,7 @@ function Filter(props) {
 
         event.preventDefault();
         
-        props.switchLoading(true)
+        props.switchLoading(true);
 
         props.changePage(1);
 
@@ -77,22 +77,32 @@ function Filter(props) {
             }
         }
 
-        if(state.name !== "az") {
+        if(state.order !== "az") {
 
-            if(state.name === "za") {
+            if(state.order === "za") {
                 stringSortDescending(filteredCountries);
                 stringSortDescending(unfilteredCountries);
                 
             }
 
-            if(state.name === "pdown") {
-                numberSortDescending(filteredCountries);
-                numberSortDescending(unfilteredCountries);
+            if(state.order === "pdown") {
+                numberSortDescending(filteredCountries, "population");
+                numberSortDescending(unfilteredCountries, "population");
             }
 
-            if(state.name === "pup") {
-                numberSortAscending(filteredCountries);
-                numberSortAscending(unfilteredCountries);
+            if(state.order === "pup") {
+                numberSortAscending(filteredCountries, "population");
+                numberSortAscending(unfilteredCountries, "population");
+            }
+
+            if(state.order === "adown") {
+                numberSortDescending(filteredCountries, "area");
+                numberSortDescending(unfilteredCountries, "area");
+            }
+
+            if(state.order === "aup") {
+                numberSortAscending(filteredCountries, "area");
+                numberSortAscending(unfilteredCountries, "area");
             }
         }
         
@@ -100,7 +110,7 @@ function Filter(props) {
         
         props.filterCountries(result);
 
-        props.switchLoading(false)
+        props.switchLoading(false);
     }
 
     return (
@@ -124,16 +134,31 @@ function Filter(props) {
                         <option value = "Oceania">Oceania</option>
                         <option value = "Polar">Polar</option>
                     </select>
+                    {/* {
+                        state.continent !== "all-continents" ?
+                        <select 
+                            name="subregion" 
+                            className={styles.selectButton}
+                            value={state.continent}
+                            onChange={(e) => {handleChange(e)}}
+                        >
+                            <option defaultValue value="all-continents">All regions</option>
+                            <option value = "Africa">Africa</option>
+                        </select> : null
+                    
+                    } */}
                     <select 
-                        name="name" 
+                        name="order" 
                         className={styles.selectButton}
-                        value={state.name}
+                        value={state.order}
                         onChange={(e) => {handleChange(e)}}
                     >
                         <option defaultValue value = "az">Name (A - Z)</option>
                         <option value = "za">Name (Z - A)</option>
                         <option value = "pdown">Population &#9660;</option>
                         <option value = "pup">Population &#9650;</option>
+                        <option value = "adown">Area &#9660;</option>
+                        <option value = "aup">Area &#9650;</option>
                     </select>
                     <select 
                         name="activity" 

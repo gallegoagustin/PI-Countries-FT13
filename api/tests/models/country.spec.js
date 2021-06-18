@@ -33,6 +33,11 @@ describe('Activity model', () => {
         Activity.create({ name: 'Running' });
       });
     });
+    describe('name', () => {
+      it('should work when its a valid name', () => {
+        Activity.findOne({ name: 1 });
+      });
+    });
     describe('all props', () => {
       it('should work when its a valid name, level, length and season', () => {
         Activity.create({ name: 'Running', level: 1, length: 1, season: "Winter" });

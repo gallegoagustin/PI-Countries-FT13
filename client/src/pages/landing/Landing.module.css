@@ -6,9 +6,60 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+}
+
+.boxContainer {
+    background-color: #00adb5;
+    color: #222831;
+    min-height: 60vh;
+    width: 25%;
+    padding: 0 5px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: center;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    position: absolute;
+    top: 20vh;
+    left: 37.5%;
+}
+
+.separator {
+    width: 75%;
+    height: 1px;
+    border-style: hidden;
+    background-color: #222831;
+}
+
+.getStartedBox:link, .getStartedBox:active, .getStartedBox:visited {
+    padding: 0.25em 0.5em;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #222831;
+    color: #222831;
+}
+
+.getStartedBox:hover {
+    background-color: #222831;
+    color: #00adb5;
 }
 
 @media (max-width: 768px) {
+    .boxContainer {
+        background-color: #00adb5;
+        color: #222831;
+        min-height: 80%;
+        width: 80%;
+        top: 10%;
+        left: 10%;
+    }
+
     .landingContainer {
         background-image: url('../../assets/world-bkg-mobile.jpg');
     }

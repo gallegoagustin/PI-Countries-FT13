@@ -51,6 +51,20 @@ describe('Activities route', () => {
   });
 });
 
+describe('Details route', () => {
+  before(() => conn.authenticate()
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  }));
+  beforeEach(() => Country.sync({ force: true })
+    .then(() => Country.create(country)));
+  describe('GET /countries/:id', () => {
+    it('should get 200', () =>
+      agent.get('/countries/ARG').expect(200)
+    );
+  });
+});
+
 describe('Activity route', () => {
   before(() => conn.authenticate()
   .catch((err) => {

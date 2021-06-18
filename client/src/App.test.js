@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import About from './pages/about/About.jsx';
-import Footer from './components/footer/Footer.jsx'
 
 test('renders about title', () => {
   render(<About />);
